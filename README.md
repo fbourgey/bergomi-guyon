@@ -21,10 +21,11 @@ uv run jupyter lab bergomi_guyon_recursion.ipynb
 
 ## Generate coefficients
 
-From the repository root, generate and verify coefficients through order six:
+From the repository root, generate coefficients through any positive integer order
+`N`:
 
 ```bash
-uv run generate-bg-coefficients --order 6 --verify --format text
+uv run generate-bg-coefficients --order N --format text
 ```
 
 The exact coefficients through order six are listed in

@@ -1,7 +1,7 @@
 """Generate exact Bergomi--Guyon coefficients.
 
 Examples:
-    uv run generate-bg-coefficients --order 6 --format latex
+    uv run generate-bg-coefficients --order 6 --format text
     uv run generate-bg-coefficients --order 6 --verify --quiet
     uv run generate-bg-coefficients --order 6 --format python --output src/bergomi_guyon/bg_coefficients_order_6.py
 """
@@ -30,8 +30,8 @@ def main() -> None:
     parser.add_argument(
         "--format",
         choices=("text", "latex", "python"),
-        default="latex",
-        help="output format (default: latex; uses diamond-tree macros)",
+        default="text",
+        help="output format (default: text; latex requires paper tree macros not bundled here)",
     )
     parser.add_argument(
         "--verify",

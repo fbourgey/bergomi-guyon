@@ -210,9 +210,16 @@ def test_latex_uses_exact_fractions():
     )
 
 
-def test_default_cli_generates_insertable_latex():
+def test_default_cli_generates_readable_text():
     output = run_cli("--order", "2").stdout
-    assert output == run_cli("--order", "2", "--format", "latex").stdout
+    assert output == run_cli("--order", "2", "--format", "text").stdout
+    assert "# Order 2" in output
+    assert "a_2:" in output
+    assert "diamond" in output
+
+
+def test_explicit_cli_latex_uses_paper_macros():
+    output = run_cli("--order", "2", "--format", "latex").stdout
     assert r"$a_{1}(k) =" in output
     assert r"\tikz[" not in output
     assert r"\bigl(\MXd\bigr)^{2}" in output
