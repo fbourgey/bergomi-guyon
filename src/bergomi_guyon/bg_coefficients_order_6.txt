@@ -1,0 +1,168 @@
+Bergomi--Guyon total implied variance expansion through order 6:
+  Sigma(k) = sum_{ell=0}^6 a_ell * epsilon^ell + O(epsilon^7)
+  Diamond trees use postfix names: Xd appends diamond X;
+  d joins the two preceding tree expressions. Examples:
+    MMd      = M diamond M
+    MXdXd    = (M diamond X) diamond X
+    MXdMdXd  = ((M diamond X) diamond M) diamond X
+
+variables:
+  zeta  = 1/2 + k/M
+  theta = 1/M
+  kappa = zeta - 1/2 = k/M
+
+# Order 0
+a_0:
+  M
+
+# Order 1
+a_1:
+  (zeta) * MXd
+
+# Order 2
+a_2:
+  (1/4*zeta^2 - 1/4*zeta - 1/4*theta) * MMd
+  (-5/4*zeta^2*theta + 3/4*zeta*theta + 3/4*theta^2) * MXd * MXd
+  (zeta^2 - theta) * MXdXd
+
+# Order 3
+a_3:
+  (-zeta^3*theta + 5/4*zeta^2*theta + 7/4*zeta*theta^2 - 3/8*zeta*theta - 3/4*theta^2) * MMd * MXd
+  (1/2*zeta^3 - 1/2*zeta^2 - 3/2*zeta*theta + 1/2*theta) * MXdMd
+  (1/4*zeta^3 - 1/4*zeta^2 - 3/4*zeta*theta + 1/4*theta) * MMdXd
+  (13/4*zeta^3*theta^2 - 3*zeta^2*theta^2 - 4*zeta*theta^3 + 5/8*zeta*theta^2 + 5/4*theta^3) * MXd * MXd * MXd
+  (-4*zeta^3*theta + 5/2*zeta^2*theta + 7*zeta*theta^2 - 3/2*theta^2) * MXd * MXdXd
+  (zeta^3 - 3*zeta*theta) * MXdXdXd
+
+# Order 4
+a_4:
+  (1/8*zeta^4 - 1/4*zeta^3 - 3/4*zeta^2*theta + 1/8*zeta^2 + 3/4*zeta*theta + 3/8*theta^2 - 1/8*theta) * MMdMd
+  (-3/16*zeta^4*theta + 3/8*zeta^3*theta + 21/32*zeta^2*theta^2 - 15/64*zeta^2*theta - 21/32*zeta*theta^2 + 3/64*zeta*theta - 7/32*theta^3 + 9/64*theta^2) * MMd * MMd
+  (9/2*zeta^4*theta^2 - 7*zeta^3*theta^2 - 189/16*zeta^2*theta^3 + 107/32*zeta^2*theta^2 + 147/16*zeta*theta^3 - 15/32*zeta*theta^2 + 51/16*theta^4 - 45/32*theta^3) * MMd * MXd * MXd
+  (-3/2*zeta^4*theta + 2*zeta^3*theta + 21/4*zeta^2*theta^2 - 5/8*zeta^2*theta - 7/2*zeta*theta^2 - 7/4*theta^3 + 3/8*theta^2) * MMd * MXdXd
+  (-11/4*zeta^4*theta + 15/4*zeta^3*theta + 21/2*zeta^2*theta^2 - 5/4*zeta^2*theta - 29/4*zeta*theta^2 - 15/4*theta^3 + 3/4*theta^2) * MXdMd * MXd
+  (1/2*zeta^4 - 1/2*zeta^3 - 3*zeta^2*theta + 3/2*zeta*theta + 3/2*theta^2) * MXdXdMd
+  (1/4*zeta^4 - 1/4*zeta^3 - 3/2*zeta^2*theta + 3/4*zeta*theta + 3/4*theta^2) * MXdMXdd
+  (-11/8*zeta^4*theta + 15/8*zeta^3*theta + 21/4*zeta^2*theta^2 - 5/8*zeta^2*theta - 29/8*zeta*theta^2 - 15/8*theta^3 + 3/8*theta^2) * MMdXd * MXd
+  (1/2*zeta^4 - 1/2*zeta^3 - 3*zeta^2*theta + 3/2*zeta*theta + 3/2*theta^2) * MXdMdXd
+  (-173/16*zeta^4*theta^3 + 27/2*zeta^3*theta^3 + 695/32*zeta^2*theta^4 - 327/64*zeta^2*theta^3 - 439/32*zeta*theta^4 + 35/64*zeta*theta^3 - 153/32*theta^5 + 105/64*theta^4) * MXd * MXd * MXd * MXd
+  (18*zeta^4*theta^2 - 73/4*zeta^3*theta^2 - 189/4*zeta^2*theta^3 + 35/8*zeta^2*theta^2 + 99/4*zeta*theta^3 + 51/4*theta^4 - 15/8*theta^3) * MXd * MXd * MXdXd
+  (-11/2*zeta^4*theta + 7/2*zeta^3*theta + 21*zeta^2*theta^2 - 15/2*zeta*theta^2 - 15/2*theta^3) * MXd * MXdXdXd
+  (1/4*zeta^4 - 1/4*zeta^3 - 3/2*zeta^2*theta + 3/4*zeta*theta + 3/4*theta^2) * MMdXdXd
+  (-3*zeta^4*theta + 2*zeta^3*theta + 21/2*zeta^2*theta^2 - 7/2*zeta*theta^2 - 7/2*theta^3) * MXdXd * MXdXd
+  (zeta^4 - 6*zeta^2*theta + 3*theta^2) * MXdXdXdXd
+
+# Order 5
+a_5:
+  (-7/8*zeta^5*theta + 31/16*zeta^4*theta + 6*zeta^3*theta^2 - 11/8*zeta^3*theta - 63/8*zeta^2*theta^2 + 5/16*zeta^2*theta - 51/8*zeta*theta^3 + 11/4*zeta*theta^2 + 45/16*theta^3 - 3/16*theta^2) * MMdMd * MXd
+  (1/8*zeta^5 - 1/4*zeta^4 - 5/4*zeta^3*theta + 1/8*zeta^3 + 3/2*zeta^2*theta + 15/8*zeta*theta^2 - 3/8*zeta*theta - 3/4*theta^2) * MMdMXdd
+  (1/4*zeta^5 - 1/2*zeta^4 - 5/2*zeta^3*theta + 1/4*zeta^3 + 3*zeta^2*theta + 15/4*zeta*theta^2 - 3/4*zeta*theta - 3/2*theta^2) * MXdMdMd
+  (31/16*zeta^5*theta^2 - 35/8*zeta^4*theta^2 - 35/4*zeta^3*theta^3 + 221/64*zeta^3*theta^2 + 189/16*zeta^2*theta^3 - 71/64*zeta^2*theta^2 + 225/32*zeta*theta^4 - 295/64*zeta*theta^3 + 15/128*zeta*theta^2 - 51/16*theta^4 + 15/32*theta^3) * MMd * MMd * MXd
+  (-zeta^5*theta + 17/8*zeta^4*theta + 49/8*zeta^3*theta^2 - 23/16*zeta^3*theta - 63/8*zeta^2*theta^2 + 5/16*zeta^2*theta - 51/8*zeta*theta^3 + 43/16*zeta*theta^2 + 11/4*theta^3 - 3/16*theta^2) * MMd * MXdMd
+  (-1/2*zeta^5*theta + 17/16*zeta^4*theta + 49/16*zeta^3*theta^2 - 23/32*zeta^3*theta - 63/16*zeta^2*theta^2 + 5/32*zeta^2*theta - 51/16*zeta*theta^3 + 43/32*zeta*theta^2 + 11/8*theta^3 - 3/32*theta^2) * MMd * MMdXd
+  (-43/2*zeta^5*theta^3 + 161/4*zeta^4*theta^3 + 1245/16*zeta^3*theta^4 - 209/8*zeta^3*theta^3 - 1395/16*zeta^2*theta^4 + 27/4*zeta^2*theta^3 - 205/4*zeta*theta^5 + 443/16*zeta*theta^4 - 35/64*zeta*theta^3 + 77/4*theta^5 - 35/16*theta^4) * MMd * MXd * MXd * MXd
+  (31/2*zeta^5*theta^2 - 26*zeta^4*theta^2 - 70*zeta^3*theta^3 + 109/8*zeta^3*theta^2 + 567/8*zeta^2*theta^3 - 35/16*zeta^2*theta^2 + 225/4*zeta*theta^4 - 37/2*zeta*theta^3 - 153/8*theta^4 + 15/16*theta^3) * MMd * MXd * MXdXd
+  (-2*zeta^5*theta + 11/4*zeta^4*theta + 49/4*zeta^3*theta^2 - 7/8*zeta^3*theta - 21/2*zeta^2*theta^2 - 51/4*zeta*theta^3 + 15/8*zeta*theta^2 + 15/4*theta^3) * MMd * MXdXdXd
+  (1/8*zeta^5 - 1/4*zeta^4 - 5/4*zeta^3*theta + 1/8*zeta^3 + 3/2*zeta^2*theta + 15/8*zeta*theta^2 - 3/8*zeta*theta - 3/4*theta^2) * MMdXdMd
+  (57/4*zeta^5*theta^2 - 97/4*zeta^4*theta^2 - 555/8*zeta^3*theta^3 + 209/16*zeta^3*theta^2 + 285/4*zeta^2*theta^3 - 35/16*zeta^2*theta^2 + 453/8*zeta*theta^4 - 303/16*zeta*theta^3 - 39/2*theta^4 + 15/16*theta^3) * MXdMd * MXd * MXd
+  (-4*zeta^5*theta + 23/4*zeta^4*theta + 49/2*zeta^3*theta^2 - 2*zeta^3*theta - 21*zeta^2*theta^2 - 51/2*zeta*theta^3 + 7/2*zeta*theta^2 + 29/4*theta^3) * MXdMd * MXdXd
+  (-7/2*zeta^5*theta + 5*zeta^4*theta + 24*zeta^3*theta^2 - 7/4*zeta^3*theta - 21*zeta^2*theta^2 - 51/2*zeta*theta^3 + 15/4*zeta*theta^2 + 15/2*theta^3) * MXdXdMd * MXd
+  (1/2*zeta^5 - 1/2*zeta^4 - 5*zeta^3*theta + 3*zeta^2*theta + 15/2*zeta*theta^2 - 3/2*theta^2) * MXdXdXdMd
+  (-7/4*zeta^5*theta + 5/2*zeta^4*theta + 12*zeta^3*theta^2 - 7/8*zeta^3*theta - 21/2*zeta^2*theta^2 - 51/4*zeta*theta^3 + 15/8*zeta*theta^2 + 15/4*theta^3) * MXdMXdd * MXd
+  (1/2*zeta^5 - 1/2*zeta^4 - 5*zeta^3*theta + 3*zeta^2*theta + 15/2*zeta*theta^2 - 3/2*theta^2) * MXdXdMXdd
+  (1/8*zeta^5 - 1/4*zeta^4 - 5/4*zeta^3*theta + 1/8*zeta^3 + 3/2*zeta^2*theta + 15/8*zeta*theta^2 - 3/8*zeta*theta - 3/4*theta^2) * MMdMdXd
+  (57/8*zeta^5*theta^2 - 97/8*zeta^4*theta^2 - 555/16*zeta^3*theta^3 + 209/32*zeta^3*theta^2 + 285/8*zeta^2*theta^3 - 35/32*zeta^2*theta^2 + 453/16*zeta*theta^4 - 303/32*zeta*theta^3 - 39/4*theta^4 + 15/32*theta^3) * MMdXd * MXd * MXd
+  (-2*zeta^5*theta + 23/8*zeta^4*theta + 49/4*zeta^3*theta^2 - zeta^3*theta - 21/2*zeta^2*theta^2 - 51/4*zeta*theta^3 + 7/4*zeta*theta^2 + 29/8*theta^3) * MMdXd * MXdXd
+  (-7/2*zeta^5*theta + 5*zeta^4*theta + 24*zeta^3*theta^2 - 7/4*zeta^3*theta - 21*zeta^2*theta^2 - 51/2*zeta*theta^3 + 15/4*zeta*theta^2 + 15/2*theta^3) * MXdMdXd * MXd
+  (1/2*zeta^5 - 1/2*zeta^4 - 5*zeta^3*theta + 3*zeta^2*theta + 15/2*zeta*theta^2 - 3/2*theta^2) * MXdXdMdXd
+  (1/4*zeta^5 - 1/4*zeta^4 - 5/2*zeta^3*theta + 3/2*zeta^2*theta + 15/4*zeta*theta^2 - 3/4*theta^2) * MXdMXddXd
+  (655/16*zeta^5*theta^4 - 129/2*zeta^4*theta^4 - 1911/16*zeta^3*theta^5 + 2247/64*zeta^3*theta^4 + 114*zeta^2*theta^5 - 481/64*zeta^2*theta^4 + 2121/32*zeta*theta^6 - 1947/64*zeta*theta^5 + 63/128*zeta*theta^4 - 339/16*theta^6 + 63/32*theta^5) * MXd * MXd * MXd * MXd * MXd
+  (-86*zeta^5*theta^3 + 471/4*zeta^4*theta^3 + 1245/4*zeta^3*theta^4 - 101/2*zeta^3*theta^3 - 2095/8*zeta^2*theta^4 + 105/16*zeta^2*theta^3 - 205*zeta*theta^5 + 447/8*zeta*theta^4 + 463/8*theta^5 - 35/16*theta^4) * MXd * MXd * MXd * MXdXd
+  (57/2*zeta^5*theta^2 - 61/2*zeta^4*theta^2 - 555/4*zeta^3*theta^3 + 63/8*zeta^3*theta^2 + 381/4*zeta^2*theta^3 + 453/4*zeta*theta^4 - 105/8*zeta*theta^3 - 105/4*theta^4) * MXd * MXd * MXdXdXd
+  (-7/4*zeta^5*theta + 5/2*zeta^4*theta + 12*zeta^3*theta^2 - 7/8*zeta^3*theta - 21/2*zeta^2*theta^2 - 51/4*zeta*theta^3 + 15/8*zeta*theta^2 + 15/4*theta^3) * MXd * MMdXdXd
+  (31*zeta^5*theta^2 - 34*zeta^4*theta^2 - 140*zeta^3*theta^3 + 9*zeta^3*theta^2 + 189/2*zeta^2*theta^3 + 225/2*zeta*theta^4 - 49/4*zeta*theta^3 - 51/2*theta^4) * MXd * MXdXd * MXdXd
+  (-7*zeta^5*theta + 9/2*zeta^4*theta + 48*zeta^3*theta^2 - 21*zeta^2*theta^2 - 51*zeta*theta^3 + 15/2*theta^3) * MXd * MXdXdXdXd
+  (1/2*zeta^5 - 1/2*zeta^4 - 5*zeta^3*theta + 3*zeta^2*theta + 15/2*zeta*theta^2 - 3/2*theta^2) * MXdMdXdXd
+  (-8*zeta^5*theta + 11/2*zeta^4*theta + 49*zeta^3*theta^2 - 21*zeta^2*theta^2 - 51*zeta*theta^3 + 15/2*theta^3) * MXdXd * MXdXdXd
+  (1/4*zeta^5 - 1/4*zeta^4 - 5/2*zeta^3*theta + 3/2*zeta^2*theta + 15/4*zeta*theta^2 - 3/4*theta^2) * MMdXdXdXd
+  (zeta^5 - 10*zeta^3*theta + 15*zeta*theta^2) * MXdXdXdXdXd
+
+# Order 6
+a_6:
+  (1/16*zeta^6 - 3/16*zeta^5 - 15/16*zeta^4*theta + 3/16*zeta^4 + 15/8*zeta^3*theta - 1/16*zeta^3 + 45/16*zeta^2*theta^2 - 9/8*zeta^2*theta - 45/16*zeta*theta^2 + 3/16*zeta*theta - 15/16*theta^3 + 9/16*theta^2) * MMdMdMd
+  (1/64*zeta^6 - 3/64*zeta^5 - 15/64*zeta^4*theta + 3/64*zeta^4 + 15/32*zeta^3*theta - 1/64*zeta^3 + 45/64*zeta^2*theta^2 - 9/32*zeta^2*theta - 45/64*zeta*theta^2 + 3/64*zeta*theta - 15/64*theta^3 + 9/64*theta^2) * MMdMMdd
+  (-5/16*zeta^6*theta + 15/16*zeta^5*theta + 97/32*zeta^4*theta^2 - 65/64*zeta^4*theta - 97/16*zeta^3*theta^2 + 15/32*zeta^3*theta - 51/8*zeta^2*theta^3 + 63/16*zeta^2*theta^2 - 5/64*zeta^2*theta + 51/8*zeta*theta^3 - 29/32*zeta*theta^2 + 51/32*theta^4 - 89/64*theta^3 + 3/64*theta^2) * MMdMd * MMd
+  (165/32*zeta^6*theta^2 - 411/32*zeta^5*theta^2 - 663/16*zeta^4*theta^3 + 731/64*zeta^4*theta^2 + 543/8*zeta^3*theta^3 - 17/4*zeta^3*theta^2 + 2235/32*zeta^2*theta^4 - 285/8*zeta^2*theta^3 + 35/64*zeta^2*theta^2 - 1827/32*zeta*theta^4 + 51/8*zeta*theta^3 - 117/8*theta^5 + 627/64*theta^4 - 15/64*theta^3) * MMdMd * MXd * MXd
+  (-5/4*zeta^6*theta + 23/8*zeta^5*theta + 97/8*zeta^4*theta^2 - 17/8*zeta^4*theta - 73/4*zeta^3*theta^2 + 1/2*zeta^3*theta - 51/2*zeta^2*theta^3 + 63/8*zeta^2*theta^2 + 153/8*zeta*theta^3 - 7/8*zeta*theta^2 + 51/8*theta^4 - 11/4*theta^3) * MMdMd * MXdXd
+  (-17/16*zeta^6*theta + 39/16*zeta^5*theta + 185/16*zeta^4*theta^2 - 29/16*zeta^4*theta - 141/8*zeta^3*theta^2 + 7/16*zeta^3*theta - 405/16*zeta^2*theta^3 + 63/8*zeta^2*theta^2 + 309/16*zeta*theta^3 - 15/16*zeta*theta^2 + 105/16*theta^4 - 45/16*theta^3) * MMdMXdd * MXd
+  (1/8*zeta^6 - 1/4*zeta^5 - 15/8*zeta^4*theta + 1/8*zeta^4 + 5/2*zeta^3*theta + 45/8*zeta^2*theta^2 - 3/4*zeta^2*theta - 15/4*zeta*theta^2 - 15/8*theta^3 + 3/8*theta^2) * MXdXdMMdd
+  (-17/8*zeta^6*theta + 39/8*zeta^5*theta + 185/8*zeta^4*theta^2 - 29/8*zeta^4*theta - 141/4*zeta^3*theta^2 + 7/8*zeta^3*theta - 405/8*zeta^2*theta^3 + 63/4*zeta^2*theta^2 + 309/8*zeta*theta^3 - 15/8*zeta*theta^2 + 105/8*theta^4 - 45/8*theta^3) * MXdMdMd * MXd
+  (1/4*zeta^6 - 1/2*zeta^5 - 15/4*zeta^4*theta + 1/4*zeta^4 + 5*zeta^3*theta + 45/4*zeta^2*theta^2 - 3/2*zeta^2*theta - 15/2*zeta*theta^2 - 15/4*theta^3 + 3/4*theta^2) * MXdMdMXdd
+  (1/4*zeta^6 - 1/2*zeta^5 - 15/4*zeta^4*theta + 1/4*zeta^4 + 5*zeta^3*theta + 45/4*zeta^2*theta^2 - 3/2*zeta^2*theta - 15/2*zeta*theta^2 - 15/4*theta^3 + 3/4*theta^2) * MXdXdMdMd
+  (1/8*zeta^6 - 1/4*zeta^5 - 15/8*zeta^4*theta + 1/8*zeta^4 + 5/2*zeta^3*theta + 45/8*zeta^2*theta^2 - 3/4*zeta^2*theta - 15/4*zeta*theta^2 - 15/8*theta^3 + 3/8*theta^2) * MXdMXddMd
+  (17/64*zeta^6*theta^2 - 51/64*zeta^5*theta^2 - 349/192*zeta^4*theta^3 + 231/256*zeta^4*theta^2 + 349/96*zeta^3*theta^3 - 61/128*zeta^3*theta^2 + 375/128*zeta^2*theta^4 - 59/24*zeta^2*theta^3 + 59/512*zeta^2*theta^2 - 375/128*zeta*theta^4 + 41/64*zeta*theta^3 - 5/512*zeta*theta^2 - 75/128*theta^5 + 511/768*theta^4 - 25/512*theta^3) * MMd * MMd * MMd
+  (-963/64*zeta^6*theta^3 + 2455/64*zeta^5*theta^3 + 5457/64*zeta^4*theta^4 - 9373/256*zeta^4*theta^3 - 4617/32*zeta^3*theta^4 + 1029/64*zeta^3*theta^3 - 14625/128*zeta^2*theta^5 + 5225/64*zeta^2*theta^4 - 1611/512*zeta^2*theta^3 + 12375/128*zeta*theta^5 - 555/32*zeta*theta^4 + 105/512*zeta*theta^3 + 2535/128*theta^6 - 4629/256*theta^5 + 525/512*theta^4) * MMd * MMd * MXd * MXd
+  (51/16*zeta^6*theta^2 - 61/8*zeta^5*theta^2 - 349/16*zeta^4*theta^3 + 413/64*zeta^4*theta^2 + 279/8*zeta^3*theta^3 - 145/64*zeta^3*theta^2 + 1125/32*zeta^2*theta^4 - 283/16*zeta^2*theta^3 + 35/128*zeta^2*theta^2 - 225/8*zeta*theta^4 + 197/64*zeta*theta^3 - 225/32*theta^5 + 307/64*theta^4 - 15/128*theta^3) * MMd * MMd * MXdXd
+  (47/4*zeta^6*theta^2 - 227/8*zeta^5*theta^2 - 1365/16*zeta^4*theta^3 + 781/32*zeta^4*theta^2 + 2205/16*zeta^3*theta^3 - 281/32*zeta^3*theta^2 + 1125/8*zeta^2*theta^4 - 1137/16*zeta^2*theta^3 + 35/32*zeta^2*theta^2 - 1821/16*zeta*theta^4 + 401/32*zeta*theta^3 - 465/16*theta^5 + 621/32*theta^4 - 15/32*theta^3) * MMd * MXdMd * MXd
+  (-5/4*zeta^6*theta + 11/4*zeta^5*theta + 97/8*zeta^4*theta^2 - 31/16*zeta^4*theta - 145/8*zeta^3*theta^2 + 7/16*zeta^3*theta - 51/2*zeta^2*theta^3 + 63/8*zeta^2*theta^2 + 153/8*zeta*theta^3 - 15/16*zeta*theta^2 + 51/8*theta^4 - 45/16*theta^3) * MMd * MXdXdMd
+  (-5/8*zeta^6*theta + 11/8*zeta^5*theta + 97/16*zeta^4*theta^2 - 31/32*zeta^4*theta - 145/16*zeta^3*theta^2 + 7/32*zeta^3*theta - 51/4*zeta^2*theta^3 + 63/16*zeta^2*theta^2 + 153/16*zeta*theta^3 - 15/32*zeta*theta^2 + 51/16*theta^4 - 45/32*theta^3) * MMd * MXdMXdd
+  (47/8*zeta^6*theta^2 - 227/16*zeta^5*theta^2 - 1365/32*zeta^4*theta^3 + 781/64*zeta^4*theta^2 + 2205/32*zeta^3*theta^3 - 281/64*zeta^3*theta^2 + 1125/16*zeta^2*theta^4 - 1137/32*zeta^2*theta^3 + 35/64*zeta^2*theta^2 - 1821/32*zeta*theta^4 + 401/64*zeta*theta^3 - 465/32*theta^5 + 621/64*theta^4 - 15/64*theta^3) * MMd * MMdXd * MXd
+  (-5/4*zeta^6*theta + 11/4*zeta^5*theta + 97/8*zeta^4*theta^2 - 31/16*zeta^4*theta - 145/8*zeta^3*theta^2 + 7/16*zeta^3*theta - 51/2*zeta^2*theta^3 + 63/8*zeta^2*theta^2 + 153/8*zeta*theta^3 - 15/16*zeta*theta^2 + 51/8*theta^4 - 45/16*theta^3) * MMd * MXdMdXd
+  (853/8*zeta^6*theta^4 - 1871/8*zeta^5*theta^4 - 16123/32*zeta^4*theta^5 + 48969/256*zeta^4*theta^4 + 23531/32*zeta^3*theta^5 - 9129/128*zeta^3*theta^4 + 73185/128*zeta^2*theta^6 - 45571/128*zeta^2*theta^5 + 5965/512*zeta^2*theta^4 - 53505/128*zeta*theta^6 + 8149/128*zeta*theta^5 - 315/512*zeta*theta^4 - 11025/128*theta^7 + 17013/256*theta^6 - 1575/512*theta^5) * MMd * MXd * MXd * MXd * MXd
+  (-963/8*zeta^6*theta^3 + 1939/8*zeta^5*theta^3 + 5457/8*zeta^4*theta^4 - 5509/32*zeta^4*theta^3 - 14733/16*zeta^3*theta^4 + 201/4*zeta^3*theta^3 - 14625/16*zeta^2*theta^5 + 6265/16*zeta^2*theta^4 - 315/64*zeta^2*theta^3 + 9915/16*zeta*theta^5 - 891/16*zeta*theta^4 + 2535/16*theta^6 - 2781/32*theta^5 + 105/64*theta^4) * MMd * MXd * MXd * MXdXd
+  (47/2*zeta^6*theta^2 - 165/4*zeta^5*theta^2 - 1365/8*zeta^4*theta^3 + 365/16*zeta^4*theta^2 + 1645/8*zeta^3*theta^3 - 63/16*zeta^3*theta^2 + 1125/4*zeta^2*theta^4 - 285/4*zeta^2*theta^3 - 1371/8*zeta*theta^4 + 105/16*zeta*theta^3 - 465/8*theta^5 + 315/16*theta^4) * MMd * MXd * MXdXdXd
+  (-5/8*zeta^6*theta + 11/8*zeta^5*theta + 97/16*zeta^4*theta^2 - 31/32*zeta^4*theta - 145/16*zeta^3*theta^2 + 7/32*zeta^3*theta - 51/4*zeta^2*theta^3 + 63/16*zeta^2*theta^2 + 153/16*zeta*theta^3 - 15/32*zeta*theta^2 + 51/16*theta^4 - 45/32*theta^3) * MMd * MMdXdXd
+  (51/4*zeta^6*theta^2 - 91/4*zeta^5*theta^2 - 349/4*zeta^4*theta^3 + 205/16*zeta^4*theta^2 + 209/2*zeta^3*theta^3 - 9/4*zeta^3*theta^2 + 1125/8*zeta^2*theta^4 - 565/16*zeta^2*theta^3 - 675/8*zeta*theta^4 + 49/16*zeta*theta^3 - 225/8*theta^5 + 77/8*theta^4) * MMd * MXdXd * MXdXd
+  (-5/2*zeta^6*theta + 7/2*zeta^5*theta + 97/4*zeta^4*theta^2 - 9/8*zeta^4*theta - 24*zeta^3*theta^2 - 51*zeta^2*theta^3 + 21/4*zeta^2*theta^2 + 51/2*zeta*theta^3 + 51/4*theta^4 - 15/8*theta^3) * MMd * MXdXdXdXd
+  (-17/16*zeta^6*theta + 39/16*zeta^5*theta + 185/16*zeta^4*theta^2 - 29/16*zeta^4*theta - 141/8*zeta^3*theta^2 + 7/16*zeta^3*theta - 405/16*zeta^2*theta^3 + 63/8*zeta^2*theta^2 + 309/16*zeta*theta^3 - 15/16*zeta*theta^2 + 105/16*theta^4 - 45/16*theta^3) * MMdXdMd * MXd
+  (1/4*zeta^6 - 1/2*zeta^5 - 15/4*zeta^4*theta + 1/4*zeta^4 + 5*zeta^3*theta + 45/4*zeta^2*theta^2 - 3/2*zeta^2*theta - 15/2*zeta*theta^2 - 15/4*theta^3 + 3/4*theta^2) * MXdMdXdMd
+  (-21/16*zeta^6*theta + 47/16*zeta^5*theta + 195/16*zeta^4*theta^2 - 17/8*zeta^4*theta - 73/4*zeta^3*theta^2 + 1/2*zeta^3*theta - 411/16*zeta^2*theta^3 + 63/8*zeta^2*theta^2 + 309/16*zeta*theta^3 - 7/8*zeta*theta^2 + 105/16*theta^4 - 11/4*theta^3) * MXdMd * MXdMd
+  (-21/16*zeta^6*theta + 47/16*zeta^5*theta + 195/16*zeta^4*theta^2 - 17/8*zeta^4*theta - 73/4*zeta^3*theta^2 + 1/2*zeta^3*theta - 411/16*zeta^2*theta^3 + 63/8*zeta^2*theta^2 + 309/16*zeta*theta^3 - 7/8*zeta*theta^2 + 105/16*theta^4 - 11/4*theta^3) * MXdMd * MMdXd
+  (-1183/16*zeta^6*theta^3 + 2407/16*zeta^5*theta^3 + 895/2*zeta^4*theta^4 - 3477/32*zeta^4*theta^3 - 9745/16*zeta^3*theta^4 + 1039/32*zeta^3*theta^3 - 9735/16*zeta^2*theta^5 + 2099/8*zeta^2*theta^4 - 105/32*zeta^2*theta^3 + 3325/8*zeta*theta^5 - 1209/32*zeta*theta^4 + 855/8*theta^6 - 1871/32*theta^5 + 35/32*theta^4) * MXdMd * MXd * MXd * MXd
+  (47*zeta^6*theta^2 - 85*zeta^5*theta^2 - 1365/4*zeta^4*theta^3 + 393/8*zeta^4*theta^2 + 825/2*zeta^3*theta^3 - 9*zeta^3*theta^2 + 1125/2*zeta^2*theta^4 - 567/4*zeta^2*theta^3 - 342*zeta*theta^4 + 49/4*zeta*theta^3 - 465/4*theta^5 + 309/8*theta^4) * MXdMd * MXd * MXdXd
+  (-21/4*zeta^6*theta + 31/4*zeta^5*theta + 195/4*zeta^4*theta^2 - 11/4*zeta^4*theta - 97/2*zeta^3*theta^2 - 411/4*zeta^2*theta^3 + 21/2*zeta^2*theta^2 + 207/4*zeta*theta^3 + 105/4*theta^4 - 15/4*theta^3) * MXdMd * MXdXdXd
+  (1/8*zeta^6 - 1/4*zeta^5 - 15/8*zeta^4*theta + 1/8*zeta^4 + 5/2*zeta^3*theta + 45/8*zeta^2*theta^2 - 3/4*zeta^2*theta - 15/4*zeta*theta^2 - 15/8*theta^3 + 3/8*theta^2) * MMdXdXdMd
+  (165/8*zeta^6*theta^2 - 297/8*zeta^5*theta^2 - 663/4*zeta^4*theta^3 + 343/16*zeta^4*theta^2 + 1617/8*zeta^3*theta^3 - 63/16*zeta^3*theta^2 + 2235/8*zeta^2*theta^4 - 285/4*zeta^2*theta^3 - 687/4*zeta*theta^4 + 105/16*zeta*theta^3 - 117/2*theta^5 + 315/16*theta^4) * MXdXdMd * MXd * MXd
+  (-5*zeta^6*theta + 15/2*zeta^5*theta + 97/2*zeta^4*theta^2 - 11/4*zeta^4*theta - 97/2*zeta^3*theta^2 - 102*zeta^2*theta^3 + 21/2*zeta^2*theta^2 + 51*zeta*theta^3 + 51/2*theta^4 - 15/4*theta^3) * MXdXdMd * MXdXd
+  (-17/4*zeta^6*theta + 25/4*zeta^5*theta + 185/4*zeta^4*theta^2 - 9/4*zeta^4*theta - 93/2*zeta^3*theta^2 - 405/4*zeta^2*theta^3 + 21/2*zeta^2*theta^2 + 207/4*zeta*theta^3 + 105/4*theta^4 - 15/4*theta^3) * MXdXdXdMd * MXd
+  (1/2*zeta^6 - 1/2*zeta^5 - 15/2*zeta^4*theta + 5*zeta^3*theta + 45/2*zeta^2*theta^2 - 15/2*zeta*theta^2 - 15/2*theta^3) * MXdXdXdXdMd
+  (1/8*zeta^6 - 1/4*zeta^5 - 15/8*zeta^4*theta + 1/8*zeta^4 + 5/2*zeta^3*theta + 45/8*zeta^2*theta^2 - 3/4*zeta^2*theta - 15/4*zeta*theta^2 - 15/8*theta^3 + 3/8*theta^2) * MMdXdMXdd
+  (165/16*zeta^6*theta^2 - 297/16*zeta^5*theta^2 - 663/8*zeta^4*theta^3 + 343/32*zeta^4*theta^2 + 1617/16*zeta^3*theta^3 - 63/32*zeta^3*theta^2 + 2235/16*zeta^2*theta^4 - 285/8*zeta^2*theta^3 - 687/8*zeta*theta^4 + 105/32*zeta*theta^3 - 117/4*theta^5 + 315/32*theta^4) * MXdMXdd * MXd * MXd
+  (-5/2*zeta^6*theta + 15/4*zeta^5*theta + 97/4*zeta^4*theta^2 - 11/8*zeta^4*theta - 97/4*zeta^3*theta^2 - 51*zeta^2*theta^3 + 21/4*zeta^2*theta^2 + 51/2*zeta*theta^3 + 51/4*theta^4 - 15/8*theta^3) * MXdMXdd * MXdXd
+  (-17/4*zeta^6*theta + 25/4*zeta^5*theta + 185/4*zeta^4*theta^2 - 9/4*zeta^4*theta - 93/2*zeta^3*theta^2 - 405/4*zeta^2*theta^3 + 21/2*zeta^2*theta^2 + 207/4*zeta*theta^3 + 105/4*theta^4 - 15/4*theta^3) * MXdXdMXdd * MXd
+  (1/2*zeta^6 - 1/2*zeta^5 - 15/2*zeta^4*theta + 5*zeta^3*theta + 45/2*zeta^2*theta^2 - 15/2*zeta*theta^2 - 15/2*theta^3) * MXdXdXdMXdd
+  (1/4*zeta^6 - 1/4*zeta^5 - 15/4*zeta^4*theta + 5/2*zeta^3*theta + 45/4*zeta^2*theta^2 - 15/4*zeta*theta^2 - 15/4*theta^3) * MXdXdMXdXdd
+  (-17/16*zeta^6*theta + 39/16*zeta^5*theta + 185/16*zeta^4*theta^2 - 29/16*zeta^4*theta - 141/8*zeta^3*theta^2 + 7/16*zeta^3*theta - 405/16*zeta^2*theta^3 + 63/8*zeta^2*theta^2 + 309/16*zeta*theta^3 - 15/16*zeta*theta^2 + 105/16*theta^4 - 45/16*theta^3) * MMdMdXd * MXd
+  (1/8*zeta^6 - 1/4*zeta^5 - 15/8*zeta^4*theta + 1/8*zeta^4 + 5/2*zeta^3*theta + 45/8*zeta^2*theta^2 - 3/4*zeta^2*theta - 15/4*zeta*theta^2 - 15/8*theta^3 + 3/8*theta^2) * MMdMXddXd
+  (1/4*zeta^6 - 1/2*zeta^5 - 15/4*zeta^4*theta + 1/4*zeta^4 + 5*zeta^3*theta + 45/4*zeta^2*theta^2 - 3/2*zeta^2*theta - 15/2*zeta*theta^2 - 15/4*theta^3 + 3/4*theta^2) * MXdMdMdXd
+  (-21/64*zeta^6*theta + 47/64*zeta^5*theta + 195/64*zeta^4*theta^2 - 17/32*zeta^4*theta - 73/16*zeta^3*theta^2 + 1/8*zeta^3*theta - 411/64*zeta^2*theta^3 + 63/32*zeta^2*theta^2 + 309/64*zeta*theta^3 - 7/32*zeta*theta^2 + 105/64*theta^4 - 11/16*theta^3) * MMdXd * MMdXd
+  (-1183/32*zeta^6*theta^3 + 2407/32*zeta^5*theta^3 + 895/4*zeta^4*theta^4 - 3477/64*zeta^4*theta^3 - 9745/32*zeta^3*theta^4 + 1039/64*zeta^3*theta^3 - 9735/32*zeta^2*theta^5 + 2099/16*zeta^2*theta^4 - 105/64*zeta^2*theta^3 + 3325/16*zeta*theta^5 - 1209/64*zeta*theta^4 + 855/16*theta^6 - 1871/64*theta^5 + 35/64*theta^4) * MMdXd * MXd * MXd * MXd
+  (47/2*zeta^6*theta^2 - 85/2*zeta^5*theta^2 - 1365/8*zeta^4*theta^3 + 393/16*zeta^4*theta^2 + 825/4*zeta^3*theta^3 - 9/2*zeta^3*theta^2 + 1125/4*zeta^2*theta^4 - 567/8*zeta^2*theta^3 - 171*zeta*theta^4 + 49/8*zeta*theta^3 - 465/8*theta^5 + 309/16*theta^4) * MMdXd * MXd * MXdXd
+  (-21/8*zeta^6*theta + 31/8*zeta^5*theta + 195/8*zeta^4*theta^2 - 11/8*zeta^4*theta - 97/4*zeta^3*theta^2 - 411/8*zeta^2*theta^3 + 21/4*zeta^2*theta^2 + 207/8*zeta*theta^3 + 105/8*theta^4 - 15/8*theta^3) * MMdXd * MXdXdXd
+  (1/8*zeta^6 - 1/4*zeta^5 - 15/8*zeta^4*theta + 1/8*zeta^4 + 5/2*zeta^3*theta + 45/8*zeta^2*theta^2 - 3/4*zeta^2*theta - 15/4*zeta*theta^2 - 15/8*theta^3 + 3/8*theta^2) * MMdXdMdXd
+  (165/8*zeta^6*theta^2 - 297/8*zeta^5*theta^2 - 663/4*zeta^4*theta^3 + 343/16*zeta^4*theta^2 + 1617/8*zeta^3*theta^3 - 63/16*zeta^3*theta^2 + 2235/8*zeta^2*theta^4 - 285/4*zeta^2*theta^3 - 687/4*zeta*theta^4 + 105/16*zeta*theta^3 - 117/2*theta^5 + 315/16*theta^4) * MXdMdXd * MXd * MXd
+  (-5*zeta^6*theta + 15/2*zeta^5*theta + 97/2*zeta^4*theta^2 - 11/4*zeta^4*theta - 97/2*zeta^3*theta^2 - 102*zeta^2*theta^3 + 21/2*zeta^2*theta^2 + 51*zeta*theta^3 + 51/2*theta^4 - 15/4*theta^3) * MXdMdXd * MXdXd
+  (-17/4*zeta^6*theta + 25/4*zeta^5*theta + 185/4*zeta^4*theta^2 - 9/4*zeta^4*theta - 93/2*zeta^3*theta^2 - 405/4*zeta^2*theta^3 + 21/2*zeta^2*theta^2 + 207/4*zeta*theta^3 + 105/4*theta^4 - 15/4*theta^3) * MXdXdMdXd * MXd
+  (1/2*zeta^6 - 1/2*zeta^5 - 15/2*zeta^4*theta + 5*zeta^3*theta + 45/2*zeta^2*theta^2 - 15/2*zeta*theta^2 - 15/2*theta^3) * MXdXdXdMdXd
+  (-17/8*zeta^6*theta + 25/8*zeta^5*theta + 185/8*zeta^4*theta^2 - 9/8*zeta^4*theta - 93/4*zeta^3*theta^2 - 405/8*zeta^2*theta^3 + 21/4*zeta^2*theta^2 + 207/8*zeta*theta^3 + 105/8*theta^4 - 15/8*theta^3) * MXdMXddXd * MXd
+  (1/2*zeta^6 - 1/2*zeta^5 - 15/2*zeta^4*theta + 5*zeta^3*theta + 45/2*zeta^2*theta^2 - 15/2*zeta*theta^2 - 15/2*theta^3) * MXdXdMXddXd
+  (-5377/32*zeta^6*theta^5 + 2559/8*zeta^5*theta^5 + 21219/32*zeta^4*theta^6 - 58079/256*zeta^4*theta^5 - 13575/16*zeta^3*theta^6 + 4671/64*zeta^3*theta^5 - 83083/128*zeta^2*theta^7 + 45817/128*zeta^2*theta^6 - 5213/512*zeta^2*theta^5 + 53389/128*zeta*theta^7 - 7061/128*zeta*theta^6 + 231/512*zeta*theta^5 + 11025/128*theta^8 - 14753/256*theta^7 + 1155/512*theta^6) * MXd * MXd * MXd * MXd * MXd * MXd
+  (853/2*zeta^6*theta^4 - 11693/16*zeta^5*theta^4 - 16123/8*zeta^4*theta^5 + 28329/64*zeta^4*theta^4 + 37507/16*zeta^3*theta^5 - 7023/64*zeta^3*theta^4 + 73185/32*zeta^2*theta^6 - 27331/32*zeta^2*theta^5 + 1155/128*zeta^2*theta^4 - 10725/8*zeta*theta^6 + 6563/64*zeta*theta^5 - 11025/32*theta^7 + 10233/64*theta^6 - 315/128*theta^5) * MXd * MXd * MXd * MXd * MXdXd
+  (-1183/8*zeta^6*theta^3 + 1719/8*zeta^5*theta^3 + 895*zeta^4*theta^4 - 1593/16*zeta^4*theta^3 - 7255/8*zeta^3*theta^4 + 231/16*zeta^3*theta^3 - 9735/8*zeta^2*theta^5 + 2103/8*zeta^2*theta^4 + 2505/4*zeta*theta^5 - 315/16*zeta*theta^4 + 855/4*theta^6 - 945/16*theta^5) * MXd * MXd * MXd * MXdXdXd
+  (165/16*zeta^6*theta^2 - 297/16*zeta^5*theta^2 - 663/8*zeta^4*theta^3 + 343/32*zeta^4*theta^2 + 1617/16*zeta^3*theta^3 - 63/32*zeta^3*theta^2 + 2235/16*zeta^2*theta^4 - 285/8*zeta^2*theta^3 - 687/8*zeta*theta^4 + 105/32*zeta*theta^3 - 117/4*theta^5 + 315/32*theta^4) * MXd * MXd * MMdXdXd
+  (-963/4*zeta^6*theta^3 + 1423/4*zeta^5*theta^3 + 5457/4*zeta^4*theta^4 - 2683/16*zeta^4*theta^3 - 5499/4*zeta^3*theta^4 + 99/4*zeta^3*theta^3 - 14625/8*zeta^2*theta^5 + 6245/16*zeta^2*theta^4 + 7455/8*zeta*theta^5 - 441/16*zeta*theta^4 + 2535/8*theta^6 - 87*theta^5) * MXd * MXd * MXdXd * MXdXd
+  (165/4*zeta^6*theta^2 - 183/4*zeta^5*theta^2 - 663/2*zeta^4*theta^3 + 99/8*zeta^4*theta^2 + 531/2*zeta^3*theta^3 + 2235/4*zeta^2*theta^4 - 189/4*zeta^2*theta^3 - 921/4*zeta*theta^4 - 117*theta^5 + 105/8*theta^4) * MXd * MXd * MXdXdXdXd
+  (-17/4*zeta^6*theta + 25/4*zeta^5*theta + 185/4*zeta^4*theta^2 - 9/4*zeta^4*theta - 93/2*zeta^3*theta^2 - 405/4*zeta^2*theta^3 + 21/2*zeta^2*theta^2 + 207/4*zeta*theta^3 + 105/4*theta^4 - 15/4*theta^3) * MXd * MXdMdXdXd
+  (94*zeta^6*theta^2 - 108*zeta^5*theta^2 - 1365/2*zeta^4*theta^3 + 121/4*zeta^4*theta^2 + 545*zeta^3*theta^3 + 1125*zeta^2*theta^4 - 189/2*zeta^2*theta^3 - 459*zeta*theta^4 - 465/2*theta^5 + 105/4*theta^4) * MXd * MXdXd * MXdXdXd
+  (-17/8*zeta^6*theta + 25/8*zeta^5*theta + 185/8*zeta^4*theta^2 - 9/8*zeta^4*theta - 93/4*zeta^3*theta^2 - 405/8*zeta^2*theta^3 + 21/4*zeta^2*theta^2 + 207/8*zeta*theta^3 + 105/8*theta^4 - 15/8*theta^3) * MXd * MMdXdXdXd
+  (-17/2*zeta^6*theta + 11/2*zeta^5*theta + 185/2*zeta^4*theta^2 - 45*zeta^3*theta^2 - 405/2*zeta^2*theta^3 + 105/2*zeta*theta^3 + 105/2*theta^4) * MXd * MXdXdXdXdXd
+  (1/8*zeta^6 - 1/4*zeta^5 - 15/8*zeta^4*theta + 1/8*zeta^4 + 5/2*zeta^3*theta + 45/8*zeta^2*theta^2 - 3/4*zeta^2*theta - 15/4*zeta*theta^2 - 15/8*theta^3 + 3/8*theta^2) * MMdMdXdXd
+  (-5/2*zeta^6*theta + 15/4*zeta^5*theta + 97/4*zeta^4*theta^2 - 11/8*zeta^4*theta - 97/4*zeta^3*theta^2 - 51*zeta^2*theta^3 + 21/4*zeta^2*theta^2 + 51/2*zeta*theta^3 + 51/4*theta^4 - 15/8*theta^3) * MMdXdXd * MXdXd
+  (1/2*zeta^6 - 1/2*zeta^5 - 15/2*zeta^4*theta + 5*zeta^3*theta + 45/2*zeta^2*theta^2 - 15/2*zeta*theta^2 - 15/2*theta^3) * MXdXdMdXdXd
+  (1/4*zeta^6 - 1/4*zeta^5 - 15/4*zeta^4*theta + 5/2*zeta^3*theta + 45/4*zeta^2*theta^2 - 15/4*zeta*theta^2 - 15/4*theta^3) * MXdMXddXdXd
+  (17*zeta^6*theta^2 - 20*zeta^5*theta^2 - 349/3*zeta^4*theta^3 + 23/4*zeta^4*theta^2 + 278/3*zeta^3*theta^3 + 375/2*zeta^2*theta^4 - 187/12*zeta^2*theta^3 - 75*zeta*theta^4 - 75/2*theta^5 + 13/3*theta^4) * MXdXd * MXdXd * MXdXd
+  (-10*zeta^6*theta + 7*zeta^5*theta + 97*zeta^4*theta^2 - 48*zeta^3*theta^2 - 204*zeta^2*theta^3 + 51*zeta*theta^3 + 51*theta^4) * MXdXd * MXdXdXdXd
+  (1/2*zeta^6 - 1/2*zeta^5 - 15/2*zeta^4*theta + 5*zeta^3*theta + 45/2*zeta^2*theta^2 - 15/2*zeta*theta^2 - 15/2*theta^3) * MXdMdXdXdXd
+  (-21/4*zeta^6*theta + 15/4*zeta^5*theta + 195/4*zeta^4*theta^2 - 24*zeta^3*theta^2 - 411/4*zeta^2*theta^3 + 105/4*zeta*theta^3 + 105/4*theta^4) * MXdXdXd * MXdXdXd
+  (1/4*zeta^6 - 1/4*zeta^5 - 15/4*zeta^4*theta + 5/2*zeta^3*theta + 45/4*zeta^2*theta^2 - 15/4*zeta*theta^2 - 15/4*theta^3) * MMdXdXdXdXd
+  (zeta^6 - 15*zeta^4*theta + 45*zeta^2*theta^2 - 15*theta^3) * MXdXdXdXdXdXd
