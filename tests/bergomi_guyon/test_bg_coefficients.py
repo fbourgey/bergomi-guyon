@@ -30,10 +30,12 @@ def result():
 
 
 def as_sympy(poly, zeta, theta):
-    return sp.Add(*(
-        sp.Rational(value.numerator, value.denominator) * zeta**z * theta**t
-        for (z, t), value in poly.terms.items()
-    ))
+    return sp.Add(
+        *(
+            sp.Rational(value.numerator, value.denominator) * zeta**z * theta**t
+            for (z, t), value in poly.terms.items()
+        )
+    )
 
 
 def test_paper_identities_through_order_six(result):
@@ -121,20 +123,23 @@ def test_heat_and_duhamel_against_symbolic_differentiation():
 def test_generated_module_import_and_exact_expressions(result, order):
     namespace = {}
     # Execute this package's generated source to validate its symbolic exports.
-    exec(render_python_module(result.coefficients[:order + 1]), namespace)  # noqa: S102
+    exec(render_python_module(result.coefficients[: order + 1]), namespace)  # noqa: S102
     assert namespace["a"][0] is None
     assert len(namespace["a"]) == order + 1
     for ell in range(1, order + 1):
-        expected = sp.Add(*(
-            as_sympy(poly, namespace["zeta"], namespace["theta"])
-            * sp.prod(sp.Symbol(tree_to_symbol(tree)) for tree in monomial)
-            for monomial, poly in result.coefficients[ell].items()
-        ))
+        expected = sp.Add(
+            *(
+                as_sympy(poly, namespace["zeta"], namespace["theta"])
+                * sp.prod(sp.Symbol(tree_to_symbol(tree)) for tree in monomial)
+                for monomial, poly in result.coefficients[ell].items()
+            )
+        )
         assert sp.expand(namespace["a"][ell] - expected) == 0
         assert not namespace["a"][ell].atoms(sp.Float)
-    assert namespace["in_k_and_M"](namespace["a"][1]) == (
-        sp.Rational(1, 2) + namespace["k"] / namespace["M"]
-    ) * namespace["MXd"]
+    assert (
+        namespace["in_k_and_M"](namespace["a"][1])
+        == (sp.Rational(1, 2) + namespace["k"] / namespace["M"]) * namespace["MXd"]
+    )
 
 
 def test_tree_symbols_are_unique(result):
@@ -143,16 +148,17 @@ def test_tree_symbols_are_unique(result):
 
 
 def test_checked_in_python_artifact_is_reproducible(result):
-    assert render_python_module(result.coefficients) == (
-        ROOT / "src/bergomi_guyon/bg_coefficients_order_6.py"
-    ).read_text()
+    assert (
+        render_python_module(result.coefficients)
+        == (ROOT / "src/bergomi_guyon/bg_coefficients_order_6.py").read_text()
+    )
 
 
 def test_checked_in_text_artifact_is_reproducible(result):
     rendered = render_coefficients(result.coefficients, "text")
-    assert rendered == (
-        ROOT / "src/bergomi_guyon/bg_coefficients_order_6.txt"
-    ).read_text()
+    assert (
+        rendered == (ROOT / "src/bergomi_guyon/bg_coefficients_order_6.txt").read_text()
+    )
     assert "Sigma(k) = sum_{ell=0}^6 a_ell * epsilon^ell + O(epsilon^7)" in rendered
     assert "MXdXd    = (M diamond X) diamond X" in rendered
     assert "MXdMdXd  = ((M diamond X) diamond M) diamond X" in rendered
@@ -164,7 +170,10 @@ def test_checked_in_text_artifact_is_reproducible(result):
 def run_cli(*args):
     return subprocess.run(
         [sys.executable, "-m", "bergomi_guyon", *args],
-        cwd=ROOT, text=True, capture_output=True, check=True,
+        cwd=ROOT,
+        text=True,
+        capture_output=True,
+        check=True,
     )
 
 
@@ -184,11 +193,15 @@ def test_quiet_suppresses_stdout_but_preserves_explicit_output(tmp_path, output_
     output = tmp_path / "coefficients"
     process = run_cli(*arguments, "--output", str(output))
     assert process.stdout == ""
-    assert output.read_text() == run_cli("--order", "2", "--format", output_format).stdout
+    assert (
+        output.read_text() == run_cli("--order", "2", "--format", output_format).stdout
+    )
 
 
 def test_latex_braces_multi_digit_exponents():
-    assert polynomial_to_latex(Polynomial.monomial(12, 10)) == r"\zeta^{12}\,\theta^{10}"
+    assert (
+        polynomial_to_latex(Polynomial.monomial(12, 10)) == r"\zeta^{12}\,\theta^{10}"
+    )
 
 
 def test_latex_uses_exact_fractions():

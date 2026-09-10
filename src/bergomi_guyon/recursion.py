@@ -36,11 +36,16 @@ class Polynomial:
         self.terms: dict[Exponent, Fraction] = {}
         for exponent, coefficient in (terms or {}).items():
             if (
-                not isinstance(exponent, tuple) or len(exponent) != 2
-                or any(isinstance(p, bool) or not isinstance(p, int) or p < 0
-                       for p in exponent)
+                not isinstance(exponent, tuple)
+                or len(exponent) != 2
+                or any(
+                    isinstance(p, bool) or not isinstance(p, int) or p < 0
+                    for p in exponent
+                )
             ):
-                raise ValueError("polynomial exponents must be two nonnegative integers")
+                raise ValueError(
+                    "polynomial exponents must be two nonnegative integers"
+                )
             value = Fraction(coefficient)
             if value:
                 self.terms[exponent] = value
@@ -189,7 +194,8 @@ class Tree:
         """Validate the tree arity and canonicalize binary children."""
         arity = {"M": 0, "U": 1, "B": 2}.get(self.kind)
         if (
-            arity is None or not isinstance(self.children, tuple)
+            arity is None
+            or not isinstance(self.children, tuple)
             or len(self.children) != arity
             or any(not isinstance(child, Tree) for child in self.children)
         ):
@@ -505,7 +511,9 @@ def source_coefficient(
             if m == 0:
                 source = forest_add(
                     source,
-                    forest_scale(derivative_product, Polynomial.constant(Fraction(1, 16))),
+                    forest_scale(
+                        derivative_product, Polynomial.constant(Fraction(1, 16))
+                    ),
                 )
     return source
 
@@ -581,9 +589,9 @@ def generate_coefficients(max_order: int) -> GenerationResult:
     for ell in range(1, max_order + 1):
         source = source_coefficient(ell, coefficients, reciprocal)
         sources.append(source)
-        coefficients.append(forest_add(
-            heat_forest(boundaries[ell]), solve_source(source)
-        ))
+        coefficients.append(
+            forest_add(heat_forest(boundaries[ell]), solve_source(source))
+        )
         if ell < max_order:
             reciprocal.append(reciprocal_coefficient(ell, coefficients, reciprocal))
 

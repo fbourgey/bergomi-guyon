@@ -17,8 +17,10 @@ from bergomi_guyon.render import (
 )
 
 
-@pytest.mark.parametrize("renderer", [render_python_module, render_latex,
-                                          lambda a: render_coefficients(a, "text")])
+@pytest.mark.parametrize(
+    "renderer",
+    [render_python_module, render_latex, lambda a: render_coefficients(a, "text")],
+)
 @pytest.mark.parametrize("coefficients", [[], [{}], [{(): ONE}, {}]])
 def test_export_rejects_invalid_series_layout(renderer, coefficients):
     with pytest.raises(ValueError, match="empty order zero"):

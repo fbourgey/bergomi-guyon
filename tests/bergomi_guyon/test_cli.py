@@ -23,18 +23,32 @@ def test_cli_invalid_order(monkeypatch, capsys, order):
 @pytest.mark.parametrize("output_format", ["python", "latex", "text"])
 def test_cli_output_file(monkeypatch, capsys, tmp_path, output_format):
     output = tmp_path / "coefficients"
-    monkeypatch.setattr(sys, "argv", [
-        "generate-bg-coefficients", "--order", "1", "--verify", "--quiet",
-        "--format", output_format, "--output", str(output),
-    ])
+    monkeypatch.setattr(
+        sys,
+        "argv",
+        [
+            "generate-bg-coefficients",
+            "--order",
+            "1",
+            "--verify",
+            "--quiet",
+            "--format",
+            output_format,
+            "--output",
+            str(output),
+        ],
+    )
     main()
     captured = capsys.readouterr()
     assert captured.out == ""
     assert "verified orders 1 through 1" in captured.err
     assert "wrote orders 1 through 1" in captured.err
     coefficients = generate_coefficients(1).coefficients
-    expected = (render_python_module(coefficients) if output_format == "python"
-                else render_coefficients(coefficients, output_format))
+    expected = (
+        render_python_module(coefficients)
+        if output_format == "python"
+        else render_coefficients(coefficients, output_format)
+    )
     assert output.read_text() == expected
 
 

@@ -5,8 +5,11 @@ from pathlib import Path
 
 
 def test_tutorial_executes_independent_checks():
-    notebook = json.loads((Path(__file__).resolve().parents[2]
-                           / "bergomi_guyon_recursion.ipynb").read_text())
+    notebook = json.loads(
+        (
+            Path(__file__).resolve().parents[2] / "bergomi_guyon_recursion.ipynb"
+        ).read_text()
+    )
     namespace = {"__name__": "__main__"}
     for index, cell in enumerate(notebook["cells"]):
         if cell["cell_type"] == "code":

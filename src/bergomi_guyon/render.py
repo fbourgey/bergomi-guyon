@@ -21,9 +21,7 @@ def polynomial_to_text(polynomial: Polynomial) -> str:
         if zeta_power:
             variables.append("zeta" if zeta_power == 1 else f"zeta^{zeta_power}")
         if theta_power:
-            variables.append(
-                "theta" if theta_power == 1 else f"theta^{theta_power}"
-            )
+            variables.append("theta" if theta_power == 1 else f"theta^{theta_power}")
         variable_part = "*".join(variables)
         if magnitude == 1 and variable_part:
             body = variable_part
@@ -42,8 +40,11 @@ def polynomial_to_text(polynomial: Polynomial) -> str:
 def polynomial_to_latex(polynomial: Polynomial) -> str:
     """Render a polynomial with exact fractions and braced LaTeX powers."""
     return (
-        re.sub(r"(\d+)/(\d+)", r"\\frac{\1}{\2}",
-               re.sub(r"\^(\d+)", r"^{\1}", polynomial_to_text(polynomial)))
+        re.sub(
+            r"(\d+)/(\d+)",
+            r"\\frac{\1}{\2}",
+            re.sub(r"\^(\d+)", r"^{\1}", polynomial_to_text(polynomial)),
+        )
         .replace("zeta", r"\zeta")
         .replace("theta", r"\theta")
         .replace("*", r"\,")
@@ -71,7 +72,9 @@ def tree_to_text(tree: Tree) -> str:
         return "M"
     if tree.kind == "U":
         return f"(X diamond {tree_to_text(tree.children[0])})"
-    return f"({tree_to_text(tree.children[0])} diamond {tree_to_text(tree.children[1])})"
+    return (
+        f"({tree_to_text(tree.children[0])} diamond {tree_to_text(tree.children[1])})"
+    )
 
 
 def tree_to_latex(tree: Tree) -> str:
@@ -114,13 +117,15 @@ def factor_latex_prefactor(polynomial: Polynomial):
     if not polynomial:
         return Polynomial.constant(0), Polynomial.constant(1)
     values = list(polynomial.terms.values())
-    rational = Fraction(gcd(*(v.numerator for v in values)),
-                        lcm(*(v.denominator for v in values)))
+    rational = Fraction(
+        gcd(*(v.numerator for v in values)), lcm(*(v.denominator for v in values))
+    )
     z = min(z for z, t in polynomial.terms)
     t = min(t for z, t in polynomial.terms)
     factor = Polynomial.monomial(z, t, rational)
-    remainder = Polynomial({(zp - z, tp - t): v / rational
-                            for (zp, tp), v in polynomial.terms.items()})
+    remainder = Polynomial(
+        {(zp - z, tp - t): v / rational for (zp, tp), v in polynomial.terms.items()}
+    )
     return factor, remainder
 
 
@@ -145,8 +150,9 @@ def diagram_product(monomial: Monomial) -> str:
     if not monomial:
         return "1"
     return r"\,".join(
-        rf"\{tree_to_paper_symbol(tree)}" if count == 1 else
-        rf"\bigl(\{tree_to_paper_symbol(tree)}\bigr)^{{{count}}}"
+        rf"\{tree_to_paper_symbol(tree)}"
+        if count == 1
+        else rf"\bigl(\{tree_to_paper_symbol(tree)}\bigr)^{{{count}}}"
         for tree, count in Counter(monomial).items()
     )
 
@@ -162,13 +168,17 @@ def _latex_polynomial(coefficient: Polynomial) -> str:
     for start in range(0, len(terms), 5):
         chunk = " ".join(
             ("" if i == 0 and sign == "+" else sign + " ") + term
-            for i, (sign, term) in enumerate(terms[start:start + 5], start)
+            for i, (sign, term) in enumerate(terms[start : start + 5], start)
         )
         chunks.append("&" + chunk)
     polynomial = (
-        r"\left(" + chunks[0][1:] + r"\right)" if len(chunks) == 1 else
-        r"\left(\begin{aligned}" + "\n  " + " \\\\\n  ".join(chunks)
-        + "\n" + r"\end{aligned}\right)"
+        r"\left(" + chunks[0][1:] + r"\right)"
+        if len(chunks) == 1
+        else r"\left(\begin{aligned}"
+        + "\n  "
+        + " \\\\\n  ".join(chunks)
+        + "\n"
+        + r"\end{aligned}\right)"
     )
     if coefficient == Polynomial.monomial(0, 0):
         polynomial = ""
@@ -180,8 +190,11 @@ def _latex_forests(products: Sequence[tuple[Monomial, Fraction]]) -> str:
     forests = []
     for j, (monomial, scale) in enumerate(products):
         sign = "-" if scale < 0 else "+" if j else ""
-        weight = "" if abs(scale) == 1 else polynomial_to_latex(
-            Polynomial.monomial(0, 0, abs(scale))) + r"\,"
+        weight = (
+            ""
+            if abs(scale) == 1
+            else polynomial_to_latex(Polynomial.monomial(0, 0, abs(scale))) + r"\,"
+        )
         forests.append(sign + weight + diagram_product(monomial))
     if len(forests) == 1:
         product = forests[0]
@@ -189,10 +202,13 @@ def _latex_forests(products: Sequence[tuple[Monomial, Fraction]]) -> str:
         product = r"\left[" + " ".join(forests) + r"\right]"
     else:
         product = (
-            r"\left[\begin{aligned}" + "\n  "
-            + " \\\\\n  ".join("&" + " ".join(forests[j:j + 2])
-                                for j in range(0, len(forests), 2))
-            + "\n" + r"\end{aligned}\right]"
+            r"\left[\begin{aligned}"
+            + "\n  "
+            + " \\\\\n  ".join(
+                "&" + " ".join(forests[j : j + 2]) for j in range(0, len(forests), 2)
+            )
+            + "\n"
+            + r"\end{aligned}\right]"
         )
     return product
 
@@ -223,15 +239,19 @@ def render_latex(coefficients: Sequence[ForestPolynomial]) -> str:
         r"\setlength{\abovedisplayskip}{5pt}\setlength{\belowdisplayskip}{5pt}",
         r"\setlength{\parskip}{3pt}",
     ]
-    lines.extend([
-        r"\[",
-        r"\zeta=\frac12+\frac{k}{M},\qquad\theta=\frac1M,\qquad",
-        r"\Sigma(k)=M+\sum_{\ell=1}^{" + str(len(coefficients) - 1)
-        + r"}\epsilon^\ell a_\ell(k)+\mathcal{O}(\epsilon^{"
-        + str(len(coefficients)) + r"}).",
-        r"\]",
-        "",
-    ])
+    lines.extend(
+        [
+            r"\[",
+            r"\zeta=\frac12+\frac{k}{M},\qquad\theta=\frac1M,\qquad",
+            r"\Sigma(k)=M+\sum_{\ell=1}^{"
+            + str(len(coefficients) - 1)
+            + r"}\epsilon^\ell a_\ell(k)+\mathcal{O}(\epsilon^{"
+            + str(len(coefficients))
+            + r"}).",
+            r"\]",
+            "",
+        ]
+    )
     for ell in range(1, len(coefficients)):
         lines.append(r"\addvspace{\baselineskip}")
         lines.append(rf"\textbf{{Order {ell}}}\\*[\baselineskip]")
@@ -246,8 +266,9 @@ def render_latex(coefficients: Sequence[ForestPolynomial]) -> str:
             polynomial = _latex_polynomial(coefficient)
             product = _latex_forests(products)
             prefix = rf"a_{{{ell}}}(k) =" if index == 0 else "+"
-            lines.append("$" + prefix + factor_text
-                         + polynomial + r"\," + product + "$")
+            lines.append(
+                "$" + prefix + factor_text + polynomial + r"\," + product + "$"
+            )
         lines.append("")
     lines.append(r"\endgroup")
     return "\n".join(lines) + "\n"
@@ -256,7 +277,9 @@ def render_latex(coefficients: Sequence[ForestPolynomial]) -> str:
 def _validate_coefficients(coefficients: Sequence[ForestPolynomial]) -> None:
     """Reject series without an empty order zero and a positive-order entry."""
     if len(coefficients) < 2 or coefficients[0]:
-        raise ValueError("coefficients must include an empty order zero and at least order one")
+        raise ValueError(
+            "coefficients must include an empty order zero and at least order one"
+        )
 
 
 def render_coefficients(
@@ -373,6 +396,8 @@ def render_python_module(coefficients: Sequence[ForestPolynomial]) -> str:
         "",
         'zeta, theta, k, M = symbols("zeta theta k M")',
         "",
+        "# Keep one generated forest term per line for comparison with the text export.",
+        "# fmt: off",
     ]
     if symbol_names:
         lines.extend(
@@ -393,13 +418,17 @@ def render_python_module(coefficients: Sequence[ForestPolynomial]) -> str:
         ):
             tree_product = " * ".join(tree_to_symbol(tree) for tree in monomial) or "1"
             prefix = "    " if index == 0 else "    + "
-            lines.append(f"{prefix}({polynomial_to_python(coefficient)}) * {tree_product}")
+            lines.append(
+                f"{prefix}({polynomial_to_python(coefficient)}) * {tree_product}"
+            )
         lines.extend([")", ""])
 
     aliases = ", ".join(f"a_{ell}" for ell in range(1, len(coefficients)))
     lines.extend(
         [
             f"a = (None, {aliases})",
+            "# fmt: on",
+            "",
             "",
             "def in_k_and_M(expression):",
             '    """Substitute zeta = 1/2 + k/M and theta = 1/M.',

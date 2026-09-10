@@ -67,12 +67,15 @@ def test_verification_detects_wrong_boundary_value():
         verify(result)
 
 
-@pytest.mark.parametrize("polynomial,message", [
-    (Polynomial(), "zero forest coefficient"),
-    (THETA, "exact degree"),
-    (THETA * ZETA.power(2), "positive leading coefficient"),
-    (THETA.power(2) * ZETA.power(2), "positive leading coefficient"),
-])
+@pytest.mark.parametrize(
+    "polynomial,message",
+    [
+        (Polynomial(), "zero forest coefficient"),
+        (THETA, "exact degree"),
+        (THETA * ZETA.power(2), "positive leading coefficient"),
+        (THETA.power(2) * ZETA.power(2), "positive leading coefficient"),
+    ],
+)
 def test_verification_checks_degree_and_leading_sign(polynomial, message):
     result = generate_coefficients(2)
     first = next(iter(result.trees[1]))

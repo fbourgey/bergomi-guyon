@@ -18,7 +18,9 @@ from bergomi_guyon.recursion import (
 )
 
 
-@pytest.mark.parametrize("exponent", [(-1, 0), (0, -1), (1.5, 0), (True, 0), (1,), "xy"])
+@pytest.mark.parametrize(
+    "exponent", [(-1, 0), (0, -1), (1.5, 0), (True, 0), (1,), "xy"]
+)
 def test_invalid_polynomial_exponents(exponent):
     with pytest.raises(ValueError, match="two nonnegative integers"):
         Polynomial({exponent: 1})
@@ -48,10 +50,17 @@ def test_sparse_algebra_cancellation_and_derivatives():
     assert p == expected  # operations did not mutate the input
 
 
-@pytest.mark.parametrize("kind,children", [
-    ("X", ()), ("M", (Tree.variance(),)), ("U", ()),
-    ("B", (Tree.variance(),)), ("U", (None,)), ("M", []),
-])
+@pytest.mark.parametrize(
+    "kind,children",
+    [
+        ("X", ()),
+        ("M", (Tree.variance(),)),
+        ("U", ()),
+        ("B", (Tree.variance(),)),
+        ("U", (None,)),
+        ("M", []),
+    ],
+)
 def test_invalid_trees(kind, children):
     with pytest.raises(ValueError, match="tree must be"):
         Tree(kind, children)
@@ -83,8 +92,13 @@ def test_reciprocal_series_identity():
     reciprocal = [FOREST_ONE]
     for ell in range(1, len(coefficients)):
         reciprocal.append(reciprocal_coefficient(ell, coefficients, reciprocal))
-        residual = forest_add(reciprocal[ell], *(
-            forest_scale(forest_multiply(coefficients[i], reciprocal[ell - i]), THETA)
-            for i in range(1, ell + 1)
-        ))
+        residual = forest_add(
+            reciprocal[ell],
+            *(
+                forest_scale(
+                    forest_multiply(coefficients[i], reciprocal[ell - i]), THETA
+                )
+                for i in range(1, ell + 1)
+            ),
+        )
         assert not residual

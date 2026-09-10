@@ -69,7 +69,9 @@ def verify(result: GenerationResult) -> None:
 
         for monomial, coefficient in coefficients[ell].items():
             if not coefficient:
-                raise AssertionError(f"zero forest coefficient at order {ell}: {monomial}")
+                raise AssertionError(
+                    f"zero forest coefficient at order {ell}: {monomial}"
+                )
             theta_factor = len(monomial) - 1
             if coefficient.min_theta_power() < theta_factor:
                 raise AssertionError(f"theta factor failed at order {ell}: {monomial}")
@@ -122,6 +124,7 @@ def verify(result: GenerationResult) -> None:
 
 def _verify_forests(result: GenerationResult) -> None:
     """Check symmetry weights and all unordered products of positive-order trees."""
+
     def symmetric_nodes(tree: Tree) -> int:
         """Count binary nodes whose two children are identical trees."""
         return sum(symmetric_nodes(child) for child in tree.children) + (

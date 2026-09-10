@@ -16,6 +16,8 @@ from sympy import Rational, symbols
 
 zeta, theta, k, M = symbols("zeta theta k M")
 
+# Keep one generated forest term per line for comparison with the text export.
+# fmt: off
 (
     MMdMdMd,
     MMdMMdd,
@@ -218,6 +220,8 @@ a_6 = (
 )
 
 a = (None, a_1, a_2, a_3, a_4, a_5, a_6)
+# fmt: on
+
 
 def in_k_and_M(expression):
     """Substitute zeta = 1/2 + k/M and theta = 1/M.
