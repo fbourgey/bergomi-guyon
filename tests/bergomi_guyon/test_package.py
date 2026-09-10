@@ -1,9 +1,9 @@
 """Check installed Bergomi--Guyon imports and CLI entry points."""
 
-from pathlib import Path
 import subprocess
 import sys
 import sysconfig
+from pathlib import Path
 
 import pytest
 

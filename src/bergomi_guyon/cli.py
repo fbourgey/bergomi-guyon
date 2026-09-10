@@ -7,8 +7,8 @@ Examples:
 """
 
 import argparse
-from pathlib import Path
 import sys
+from pathlib import Path
 
 from . import generate_coefficients, verify
 from .render import render_coefficients, render_python_module

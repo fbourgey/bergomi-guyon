@@ -12,7 +12,6 @@ from dataclasses import dataclass
 from fractions import Fraction
 from math import factorial
 
-
 Exponent = tuple[int, int]  # powers of (zeta, theta)
 
 

@@ -10,7 +10,11 @@ def test_tutorial_executes_independent_checks():
     namespace = {"__name__": "__main__"}
     for index, cell in enumerate(notebook["cells"]):
         if cell["cell_type"] == "code":
-            exec(compile("".join(cell["source"]), f"notebook cell {index}", "exec"), namespace)
+            # Execute the repository's tutorial cells as a regression test.
+            exec(  # noqa: S102
+                compile("".join(cell["source"]), f"notebook cell {index}", "exec"),
+                namespace,
+            )
     # The current tutorial works through order three; the coefficient suite
     # separately verifies the publication artifacts through order six.
     assert len(namespace["third_order"].coefficients) == 4

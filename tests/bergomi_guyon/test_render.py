@@ -7,8 +7,13 @@ import sympy as sp
 
 from bergomi_guyon.recursion import ONE, Polynomial, Tree
 from bergomi_guyon.render import (
-    factor_latex_prefactor, polynomial_to_python, polynomial_to_text,
-    render_coefficients, render_latex, render_python_module, tree_to_latex,
+    factor_latex_prefactor,
+    polynomial_to_python,
+    polynomial_to_text,
+    render_coefficients,
+    render_latex,
+    render_python_module,
+    tree_to_latex,
 )
 
 
@@ -23,7 +28,8 @@ def test_export_rejects_invalid_series_layout(renderer, coefficients):
 def test_zero_and_constant_exports():
     coefficients = [{}, {}, {(): Polynomial.constant(Fraction(-2, 3))}]
     namespace = {}
-    exec(render_python_module(coefficients), namespace)
+    # Execute this package's generated source for fixed test coefficients.
+    exec(render_python_module(coefficients), namespace)  # noqa: S102
     assert namespace["a"] == (None, sp.S.Zero, -sp.Rational(2, 3))
     assert namespace["in_k_and_M"](namespace["a"][1]) == 0
     assert "a_1:\n  0" in render_coefficients(coefficients, "text")

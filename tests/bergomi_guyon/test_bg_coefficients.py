@@ -1,10 +1,10 @@
 """Paper identities, exact artifact reproduction, and BG export regressions."""
 
+import subprocess
+import sys
 from dataclasses import replace
 from fractions import Fraction
 from pathlib import Path
-import subprocess
-import sys
 
 import pytest
 import sympy as sp
@@ -12,15 +12,14 @@ import sympy as sp
 from bergomi_guyon import generate_coefficients, verify
 from bergomi_guyon.recursion import Polynomial, Tree, heat, solve_zero_boundary
 from bergomi_guyon.render import (
-    group_latex_terms,
     factor_latex_prefactor,
+    group_latex_terms,
     polynomial_to_latex,
     render_coefficients,
     render_python_module,
     tree_to_symbol,
 )
 from bergomi_guyon.verify import verify_matching
-
 
 ROOT = Path(__file__).resolve().parents[2]
 
@@ -121,7 +120,8 @@ def test_heat_and_duhamel_against_symbolic_differentiation():
 @pytest.mark.parametrize("order", [1, 2, 6])
 def test_generated_module_import_and_exact_expressions(result, order):
     namespace = {}
-    exec(render_python_module(result.coefficients[:order + 1]), namespace)
+    # Execute this package's generated source to validate its symbolic exports.
+    exec(render_python_module(result.coefficients[:order + 1]), namespace)  # noqa: S102
     assert namespace["a"][0] is None
     assert len(namespace["a"]) == order + 1
     for ell in range(1, order + 1):
@@ -171,7 +171,8 @@ def run_cli(*args):
 def test_verified_python_stdout_is_importable():
     process = run_cli("--order", "1", "--verify", "--format", "python")
     namespace = {}
-    exec(process.stdout, namespace)
+    # Execute Python emitted by the local CLI with fixed test arguments.
+    exec(process.stdout, namespace)  # noqa: S102
     assert len(namespace["a"]) == 2
     assert "verified orders 1 through 1" in process.stderr
 

@@ -1,10 +1,10 @@
 """Deterministic text, LaTeX, and SymPy-source rendering of BG coefficients."""
 
-from collections.abc import Sequence
+import re
 from collections import Counter
+from collections.abc import Sequence
 from fractions import Fraction
 from math import gcd, lcm
-import re
 
 from .recursion import ForestPolynomial, Monomial, Polynomial, Tree
 

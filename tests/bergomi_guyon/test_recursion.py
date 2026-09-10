@@ -4,8 +4,17 @@ import pytest
 
 from bergomi_guyon import generate_coefficients
 from bergomi_guyon.recursion import (
-    FOREST_ONE, ONE, THETA, ZETA, Polynomial, Tree, forest_add,
-    forest_multiply, forest_scale, heat, reciprocal_coefficient,
+    FOREST_ONE,
+    ONE,
+    THETA,
+    ZETA,
+    Polynomial,
+    Tree,
+    forest_add,
+    forest_multiply,
+    forest_scale,
+    heat,
+    reciprocal_coefficient,
 )
 
 

@@ -4,9 +4,20 @@ from fractions import Fraction
 from math import factorial
 
 from .recursion import (
-    FOREST_ONE, LAMBDA, THETA, ZETA, ForestPolynomial, GenerationResult,
-    Polynomial, Tree, forest_add, forest_D, forest_multiply, forest_scale,
-    heat, heat_forest,
+    FOREST_ONE,
+    LAMBDA,
+    THETA,
+    ZETA,
+    ForestPolynomial,
+    GenerationResult,
+    Polynomial,
+    Tree,
+    forest_add,
+    forest_D,
+    forest_multiply,
+    forest_scale,
+    heat,
+    heat_forest,
 )
 
 
