@@ -17,3 +17,6 @@ wheels/
 .coverage
 htmlcov/
 .cache/
+
+# Figures exported by the research notebooks
+/figures/
