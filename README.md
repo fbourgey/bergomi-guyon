@@ -29,20 +29,21 @@ uv run jupyter lab bergomi_guyon_recursion.ipynb
 
 ## Magic-strike experiments
 
-Open the research notebooks locally with `uv run jupyter lab`:
+Open the research notebooks locally with `uv run jupyter lab`, or use the
+Colab links below and select `Runtime → Run all`. Setup runs automatically.
 
-| Notebook | Contents |
-| --- | --- |
-| [heston.ipynb](heston.ipynb) | Heston variance, gamma, and implied power variance comparisons |
-| [rough_bergomi.ipynb](rough_bergomi.ipynb) | Forward variance curves and Monte Carlo comparisons |
-| [market_swap_estimates.ipynb](market_swap_estimates.ipynb) | SPX variance and gamma estimates against a ten-node Fukasawa benchmark |
+| Notebook | Contents | Google Colab |
+| --- | --- | --- |
+| [heston.ipynb](heston.ipynb) | Heston variance, gamma, and implied power variance comparisons | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fbourgey/bergomi-guyon/blob/main/heston.ipynb) |
+| [rough_bergomi.ipynb](rough_bergomi.ipynb) | Forward variance curves and Monte Carlo comparisons | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fbourgey/bergomi-guyon/blob/main/rough_bergomi.ipynb) |
+| [market_swap_estimates.ipynb](market_swap_estimates.ipynb) | SPX variance and gamma estimates against a ten-node Fukasawa benchmark | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fbourgey/bergomi-guyon/blob/main/market_swap_estimates.ipynb) |
 
 Use `set_id = 1` or `set_id = 2` in the model notebooks. The rough Bergomi
 notebook defaults to 300,000 paths, 300 time steps, 15 maturities, and five
 batches; reduce `n_mc`, `n_disc`, `n_batch`, and `Ts` for a shorter run.
 
-Four SPX snapshots are included in [data/](data/). In the market notebook,
-replace the absolute CSV path with `f"data/{date}_spx_vol.csv"` to use them.
+Four SPX snapshots are included in [data/](data/). The market notebook loads
+them from the repository locally, or directly from GitHub in Colab.
 Create `figures/` before setting `SAVEFIG = True` to export plots.
 
 ## Generate coefficients
