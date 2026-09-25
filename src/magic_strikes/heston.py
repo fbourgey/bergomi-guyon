@@ -135,11 +135,12 @@ class HestonModel(ForwardVarianceModel):
         """Compute the fair strike of a total gamma swap."""
         T = np.asarray(T)
         lbd_prime = self.lbd - self.rho * self.nu
-        vbar_prime = self.lbd * self.vbar / lbd_prime
 
         if lbd_prime == 0.0:
-            return vbar_prime * T
+            # Under the share measure dv = lbd * vbar dt when lbd' = 0.
+            return self.v * T + 0.5 * self.lbd * self.vbar * T**2
 
+        vbar_prime = self.lbd * self.vbar / lbd_prime
         return (
             vbar_prime * T
             + (self.v - vbar_prime) * (1.0 - np.exp(-lbd_prime * T)) / lbd_prime

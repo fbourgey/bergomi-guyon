@@ -33,6 +33,32 @@ def test_heston_gammaswap_matches_fukasawa_quadrature():
     assert np.allclose(gamma_swaps, gamma_swaps_quad, atol=1e-3)
 
 
+def test_heston_gammaswap_zero_share_measure_reversion():
+    # lbd - rho * nu = 0: under the share measure v_t = v + lbd * vbar * t.
+    params = {"v": 0.04, "lbd": 0.3, "vbar": 0.05, "nu": 0.6, "rho": 0.5}
+    heston = HestonModel(params=params)
+    Ts = np.array([0.1, 0.5, 1.0])
+
+    gamma_swaps = heston.gamma_swap(T=Ts)
+
+    assert np.allclose(gamma_swaps, 0.04 * Ts + 0.5 * 0.3 * 0.05 * Ts**2)
+    # Continuity with a nearby nonzero share-measure reversion.
+    near = HestonModel(params={**params, "rho": 0.5 - 1e-4}).gamma_swap(T=Ts)
+    assert np.allclose(gamma_swaps, near, rtol=1e-4)
+
+
+def test_heston_fukasawa_methods_run_with_default_grid():
+    params = {"v": 0.04, "lbd": 1.0, "vbar": 0.04, "nu": 0.6, "rho": -0.8}
+    heston = HestonModel(params=params)
+    T = np.array([0.5])
+
+    gamma_swaps = heston.gamma_swap_fukasawa(T=T)
+    swaps = heston.swap_fukasawa(T=T, opt="gamma")
+
+    assert np.allclose(gamma_swaps, heston.gamma_swap(T=T), atol=1e-3)
+    assert np.allclose(swaps, gamma_swaps)
+
+
 def test_heston_implied_power_variance_reconstructs_power_moment():
     params = {"v": 0.117, "lbd": 3.37, "vbar": 0.048, "nu": 1.99, "rho": -0.68}
     heston = HestonModel(params=params)
