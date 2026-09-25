@@ -61,6 +61,25 @@ def test_heston_clone_with_params_is_subclass_safe():
     assert np.isclose(cloned.s0, model.s0)
 
 
+def test_heston_xi0_attributes_describe_heston_curve():
+    model = HestonModel(
+        params={"v": 0.09, "lbd": 1.0, "vbar": 0.04, "nu": 0.6, "rho": -0.8}
+    )
+    flat = HestonModel(
+        params={"v": 0.04, "lbd": 1.0, "vbar": 0.04, "nu": 0.6, "rho": -0.8}
+    )
+
+    assert np.isclose(model.xi0_0, 0.09)
+    assert not model.xi0_flat
+    assert np.isclose(flat.xi0_0, 0.04)
+    assert flat.xi0_flat
+
+
+def test_heston_rejects_identically_zero_forward_variance():
+    with pytest.raises(ValueError, match="xi0 must be positive"):
+        HestonModel(params={"v": 0.0, "lbd": 0.0, "vbar": 0.04, "nu": 0.6, "rho": 0.0})
+
+
 def test_swap_mc_all_variance_uses_quadrature_not_path_integral(monkeypatch):
     model = DummyModel(params={}, xi0=lambda t: 0.04)
 

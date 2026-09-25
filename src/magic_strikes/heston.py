@@ -25,12 +25,17 @@ class HestonModel(ForwardVarianceModel):
         s0 : float, optional
             Initial spot price.
         """
-        super().__init__(params=params, s0=s0)
         self.lbd, self.rho, self.nu, self.vbar, self.v = require_params(
             params, ("lbd", "rho", "nu", "vbar", "v")
         )
-        self.xi0 = lambda t: _xi0_heston(t=t, lbd=self.lbd, vbar=self.vbar, v=self.v)
         self._check_params()
+        # Pass the Heston curve to the base class so xi0_0, xi0_flat, and the
+        # positivity check describe it rather than the default flat curve.
+        super().__init__(
+            params=params,
+            xi0=lambda t: _xi0_heston(t=t, lbd=self.lbd, vbar=self.vbar, v=self.v),
+            s0=s0,
+        )
 
     def _check_params(self):
         """Check that parameters satisfy necessary conditions for the Heston model."""
