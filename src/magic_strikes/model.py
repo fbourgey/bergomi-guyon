@@ -1011,7 +1011,7 @@ class ForwardVarianceModel(ABC):
         opt="all",
         n_quad: int = 5,
         ks_interp=None,
-        std: None | float = None,
+        std: None | float = 5,
         n_interp: int = 1001,
         verbose: bool = False,
         **kwargs,
@@ -1030,10 +1030,9 @@ class ForwardVarianceModel(ABC):
         ks_interp : array_like, optional
             Explicit log-strike grid used to invert the Fukasawa normalizing
             transformation. It cannot be combined with ``std``.
-        std : float or None, optional
+        std : float or None, default 5
             Width of an automatically generated interpolation grid in ATM total
-            standard deviations. Exactly one of ``ks_interp`` and ``std`` must
-            be provided.
+            standard deviations. Set to ``None`` when passing ``ks_interp``.
         n_interp : int, default 1001
             Number of points in the automatic interpolation grid.
         verbose : bool, default False
@@ -1106,7 +1105,7 @@ class ForwardVarianceModel(ABC):
         )
 
     def gamma_swap_fukasawa(
-        self, T, n_quad=5, ks_interp=None, std=None, n_interp=1001, **kwargs
+        self, T, n_quad=5, ks_interp=None, std=5, n_interp=1001, **kwargs
     ):
         """
         Compute total gamma-swap strikes using Fukasawa's representation.
@@ -1119,9 +1118,9 @@ class ForwardVarianceModel(ABC):
             Number of quadrature nodes.
         ks_interp : array_like, optional
             Explicit log-strike grid. It cannot be combined with ``std``.
-        std : float or None, optional
-            Width of the automatic grid in ATM total standard deviations.
-            Exactly one of ``ks_interp`` and ``std`` must be provided.
+        std : float or None, default 5
+            Width of the automatic grid in ATM total standard deviations. Set
+            to ``None`` when passing ``ks_interp``.
         n_interp : int, default 1001
             Number of points in the automatic interpolation grid.
         **kwargs
