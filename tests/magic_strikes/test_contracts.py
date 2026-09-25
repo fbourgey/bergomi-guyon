@@ -3,8 +3,7 @@
 import numpy as np
 import pytest
 
-from magic_strikes import magic_strike, swap
-from magic_strikes.heston import HestonModel, get_params_heston
+from magic_strikes import magic_strike
 from magic_strikes.rough_bergomi import RoughBergomiModel, get_params_rough_bergomi
 
 
