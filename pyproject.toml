@@ -6,15 +6,21 @@ build-backend = "hatchling.build"
 name = "bergomi-guyon"
 version = "0.1.0"
 authors = [{ name = "Florian Bourgey", email = "fb2615@nyu.edu" }]
-description = "Exact forest-expansion coefficients for the Bergomi–Guyon smile expansion"
+description = "Bergomi–Guyon forest expansions and magic-strike contract approximations"
 readme = "README.md"
 requires-python = ">=3.12"
 license = "MIT"
 dependencies = [
     "ipykernel>=7.1.0",
     "jupyterlab>=4.5.0",
+    "matplotlib>=3.10",
+    "numfracpy>=0.4",
+    "numpy>=2.4.1",
+    "pandas>=3.0.0",
     "pytest>=9.0.2",
     "ruff>=0.16.7",
+    "scipy>=1.17.0",
+    "seaborn>=0.13.2",
     "sympy>=1.14.0",
 ]
 
@@ -22,7 +28,7 @@ dependencies = [
 generate-bg-coefficients = "bergomi_guyon.cli:main"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/bergomi_guyon"]
+packages = ["src/bergomi_guyon", "src/magic_strikes"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
