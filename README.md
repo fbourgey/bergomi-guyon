@@ -16,7 +16,9 @@ This repository reproduces results from:
   Available at [SSRN 7468158](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7468158)
   and [arXiv:2609.17869](https://arxiv.org/abs/2609.17869).
 
-- Bourgey, F., & Gatheral, J. (2026). *Magic strikes for variance and gamma       contracts, and other attainable claims*. Forthcoming.
+- Bourgey, F., & Gatheral, J. (2026). *Magic strikes for variance and gamma contracts, and other attainable claims*.
+  Available at [SSRN 7533078](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7533078)
+  and [arXiv:2609.33913](https://arxiv.org/abs/2609.33913).
 
 ## Notebooks
 
